@@ -9,16 +9,20 @@ public class Main {
         final ColumnDivide columnDivide = new ColumnDivide();
         final Formatter formatter = new Formatter();
         final Scanner scanner = new Scanner(System.in);
-
+        String dividendLine;
         System.out.print(ASK_FOR_DIVIDEND);
-        final int dividend = Integer.parseInt(scanner.nextLine());
 
-        System.out.print(ASK_FOR_DIVIDER);
-        final int divider = Integer.parseInt(scanner.nextLine());
+        while (!(dividendLine = scanner.nextLine()).equals("exit")) {
+            final int dividend = Integer.parseInt(dividendLine);
 
-        final List<Integer>[] lists = columnDivide.divideByColumn(dividend, divider);
-        final String result = formatter.format(dividend, divider, lists);
+            System.out.print(ASK_FOR_DIVIDER);
+            final int divider = Integer.parseInt(scanner.nextLine());
 
-        System.out.println(result);
+            final List<Integer>[] lists = columnDivide.divideByColumn(dividend, divider);
+            final String result = formatter.format(dividend, divider, lists);
+
+            System.out.println(result);
+            System.out.print(ASK_FOR_DIVIDEND);
+        }
     }
 }

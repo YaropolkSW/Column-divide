@@ -10,15 +10,12 @@ public class ColumnDivideTest {
     public void shouldFormatCorrectly() {
         final int dividend = 78945;
         final int divider = 4;
-        final StringBuilder testBuilder = new StringBuilder();
-        testBuilder.append("_78945|4\n").append(" 4    |-----\n").append(" -    |19736\n").append("_38\n")
-                .append(" 36\n").append(" --\n").append(" _29\n").append("  28\n")
-                .append("  --\n").append("  _14\n").append("   12\n").append("   --\n")
-                .append("   _25\n").append("    24\n").append("    --\n").append("     1\n");
+        final String expectedString = "_78945|4\n 4    |-----\n -    |19736\n_38\n 36\n --\n _29\n  28\n" +
+                "  --\n  _14\n   12\n   --\n   _25\n    24\n    --\n     1\n";
 
         final List<Integer>[] lists = columnDivide.divideByColumn(dividend, divider);
         final String actualString = formatter.format(dividend, divider, lists);
 
-        Assertions.assertEquals(testBuilder.toString(), actualString);
+        Assertions.assertEquals(expectedString, actualString);
     }
 }
