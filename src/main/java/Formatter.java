@@ -8,10 +8,10 @@ public class Formatter {
     private static final String EMPTY_STRING = "";
     private static final String NEW_LINE = "\n";
 
-    public String format(final int dividend, final int divider, final List<Integer>[] lists) {
+    public String format(final int dividend, final int divider, final DataTransfer dataTransfer) {
         final StringBuilder resultBuilder = new StringBuilder();
-        final List<Integer> subtracts = lists[0];
-        final List<Integer> numbers = lists[1];
+        final List<Integer> subtracts = dataTransfer.getSubtracts();
+        final List<Integer> numbers = dataTransfer.getNumbers();
         final int firstSubstractLength = String.valueOf(subtracts.get(0)).length();
         final int dividendLength = String.valueOf(dividend).length();
 
@@ -38,13 +38,13 @@ public class Formatter {
             }
             resultBuilder.append(SPACE + numbers.get(0) + NEW_LINE);
         } else if (subtracts.size() == 1 && subtracts.get(0) != dividend) {
-            for (int i = 0; i < dividendLength - firstSubstractLength; i++) {
+            for (int i = 0; i < firstSubstractLength - String.valueOf(numbers.get(0)).length(); i++) {
                 resultBuilder.append(SPACE);
             }
             resultBuilder.append(SPACE + numbers.get(0) + NEW_LINE);
         } else {
             int j = 0;
-            while (String.valueOf(String.valueOf(dividend).charAt(j)).equals(String.valueOf(String.valueOf(subtracts.get(0)).charAt(j))) && j < firstSubstractLength) {
+            while (String.valueOf(String.valueOf(dividend).charAt(j)).equals(String.valueOf(String.valueOf(subtracts.get(0)).charAt(j))) && j < firstSubstractLength - 1) {///////////////
                 resultBuilder.append(SPACE);
                 j++;
             }
@@ -52,22 +52,23 @@ public class Formatter {
         }
 
         for (int i = 1; i < subtracts.size(); i++) {
+            final int iSubstractLength = String.valueOf(subtracts.get(i)).length();
 
-            for (int j = 0; j < i; j++) {
+            for (int j = 0; j < i + firstSubstractLength - iSubstractLength + 1; j++) {
                 resultBuilder.append(SPACE);
             }
             resultBuilder.append(subtracts.get(i) + NEW_LINE);
             for (int j = 0; j < i; j++) {
                 resultBuilder.append(SPACE);
             }
-            for (int j = 0; j < String.valueOf(subtracts.get(i)).length(); j++) {
+            for (int j = 0; j < iSubstractLength; j++) {
                 resultBuilder.append(HORIZONTAL_LINE);
             }
             resultBuilder.append(NEW_LINE);
-            for (int j = 0; j < i + String.valueOf(subtracts.get(i)).length() - String.valueOf(numbers.get(i)).length(); j++) {
+            for (int j = 0; j < i + iSubstractLength - String.valueOf(numbers.get(i)).length(); j++) {
                 resultBuilder.append(SPACE);
             }
-            resultBuilder.append((i == subtracts.size() - 1 ? EMPTY_STRING : MINUS) + numbers.get(i) + NEW_LINE);
+            resultBuilder.append((i == subtracts.size() - 1 ? EMPTY_STRING : SPACE) + numbers.get(i) + NEW_LINE);
 
         }
 
