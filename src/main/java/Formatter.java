@@ -8,10 +8,16 @@ public class Formatter {
     private static final String EMPTY_STRING = "";
     private static final String NEW_LINE = "\n";
 
-    public String format(final int dividend, final int divider, final DataTransfer dataTransfer) {
+    public String format(final int dividend, final int divider, final CalculationDTO calculationDTO) {
         final StringBuilder resultBuilder = new StringBuilder();
-        final List<Integer> subtracts = dataTransfer.getSubtracts();
-        final List<Integer> numbers = dataTransfer.getNumbers();
+
+        return resultBuilder.append(formatFirstFourStrings(dividend, divider, calculationDTO)).append(formatLastStrings(dividend, calculationDTO)).toString();
+    }
+
+    private StringBuilder formatFirstFourStrings(final int dividend, final int divider, final CalculationDTO calculationDTO) {
+        final StringBuilder resultBuilder = new StringBuilder();
+        final List<Integer> subtracts = calculationDTO.getSubtracts();
+        final List<Integer> numbers = calculationDTO.getNumbers();
         final int firstSubstractLength = String.valueOf(subtracts.get(0)).length();
         final int dividendLength = String.valueOf(dividend).length();
 
@@ -44,12 +50,21 @@ public class Formatter {
             resultBuilder.append(SPACE + numbers.get(0) + NEW_LINE);
         } else {
             int j = 0;
-            while (String.valueOf(String.valueOf(dividend).charAt(j)).equals(String.valueOf(String.valueOf(subtracts.get(0)).charAt(j))) && j < firstSubstractLength - 1) {///////////////
+            while (j < firstSubstractLength && String.valueOf(String.valueOf(dividend).charAt(j)).equals(String.valueOf(String.valueOf(subtracts.get(0)).charAt(j)))) {
                 resultBuilder.append(SPACE);
                 j++;
             }
             resultBuilder.append(MINUS + numbers.get(0) + NEW_LINE);
         }
+        return resultBuilder;
+    }
+
+    private StringBuilder formatLastStrings(final int dividend, final CalculationDTO calculationDTO) {
+        final StringBuilder resultBuilder = new StringBuilder();
+        final List<Integer> subtracts = calculationDTO.getSubtracts();
+        final List<Integer> numbers = calculationDTO.getNumbers();
+        final int firstSubstractLength = String.valueOf(subtracts.get(0)).length();
+        final int dividendLength = String.valueOf(dividend).length();
 
         for (int i = 1; i < subtracts.size(); i++) {
             final int iSubstractLength = String.valueOf(subtracts.get(i)).length();
@@ -65,13 +80,19 @@ public class Formatter {
                 resultBuilder.append(HORIZONTAL_LINE);
             }
             resultBuilder.append(NEW_LINE);
-            for (int j = 0; j < i + iSubstractLength - String.valueOf(numbers.get(i)).length(); j++) {
-                resultBuilder.append(SPACE);
+            if (i == subtracts.size() - 1) {
+                for (int j = 0; j < dividendLength - String.valueOf(numbers.get(i)).length() + 1; j++) {
+                    resultBuilder.append(SPACE);
+                }
+            } else {
+                for (int j = 0; j < i + iSubstractLength - String.valueOf(numbers.get(i)).length(); j++) {
+                    resultBuilder.append(SPACE);
+                }
             }
-            resultBuilder.append((i == subtracts.size() - 1 ? EMPTY_STRING : SPACE) + numbers.get(i) + NEW_LINE);
+            resultBuilder.append((i == subtracts.size() - 1 ? EMPTY_STRING : MINUS) + numbers.get(i) + NEW_LINE);
 
         }
 
-        return resultBuilder.toString();
+        return resultBuilder;
     }
 }

@@ -5,7 +5,7 @@ public class ColumnDivide {
     private static final String DIVIDER_IS_ZERO = "Нельзя делить на ноль!";
     private static final String DIVIDER_BIGGER_THAN_DIVIDEND = "Делитель больше делимого!";
 
-    public DataTransfer divideByColumn(final int dividend, final int divider) {
+    public CalculationDTO divideByColumn(final int dividend, final int divider) {
         final List<Integer> subtracts = new ArrayList<>();
         final List<Integer> numbers = new ArrayList<>();
 
@@ -42,7 +42,6 @@ public class ColumnDivide {
             }
             lengthOfDividend--;
         }
-        DataTransfer dataTransfer = new DataTransfer(subtracts, numbers);
-        return dataTransfer;
+        return new CalculationDTO(subtracts, numbers);
     }
 }

@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -17,10 +16,10 @@ public class Main {
             try {
                 final int dividend = Integer.parseInt(dividendLine);
                 System.out.print(ASK_FOR_DIVIDER);
-                int divider = Integer.parseInt(scanner.nextLine());
+                final int divider = Integer.parseInt(scanner.nextLine());
 
-                final DataTransfer dataTransfer = columnDivide.divideByColumn(dividend, divider);
-                final String result = formatter.format(dividend, divider, dataTransfer);
+                final CalculationDTO calculationDTO = columnDivide.divideByColumn(dividend, divider);
+                final String result = formatter.format(dividend, divider, calculationDTO);
 
                 System.out.println(result);
             } catch (ArithmeticException e) {

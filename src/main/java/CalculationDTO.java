@@ -1,11 +1,10 @@
-import java.util.ArrayList;
 import java.util.List;
 
-public class DataTransfer {
+public class CalculationDTO {
     private final List<Integer> subtracts;
     private final List<Integer> numbers;
 
-    public DataTransfer(List<Integer> subtracts, List<Integer> numbers) {
+    public CalculationDTO(List<Integer> subtracts, List<Integer> numbers) {
         this.subtracts = subtracts;
         this.numbers = numbers;
     }
