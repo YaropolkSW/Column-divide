@@ -35,21 +35,15 @@ public class ColumnDivideTest {
     public void shouldThrowExceptionIfDividerIsZero() {
         final int dividend = 8;
         final int divider = 0;
-        try {
-            columnDivide.divideByColumn(dividend, divider);
-        } catch (ArithmeticException e) {
-            Assertions.assertEquals(ArithmeticException.class, e.getClass());
-        }
+        final String message = "Нельзя делить на ноль!";
+        Assertions.assertThrowsExactly(ArithmeticException.class, () -> columnDivide.divideByColumn(dividend, divider), message);
     }
 
     @Test
     public void shouldThrowExceptionIfDividerIsBiggerThanDividend() {
         final int dividend = 8;
         final int divider = 16;
-        try {
-            columnDivide.divideByColumn(dividend, divider);
-        } catch (ArithmeticException e) {
-            Assertions.assertEquals(ArithmeticException.class, e.getClass());
-        }
+        final String message = "Делитель больше делимого!";
+        Assertions.assertThrows(ArithmeticException.class, () -> columnDivide.divideByColumn(dividend, divider), message);
     }
 }
