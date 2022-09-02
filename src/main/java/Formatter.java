@@ -11,10 +11,12 @@ public class Formatter {
     public String format(final int dividend, final int divider, final CalculationDTO calculationDTO) {
         final StringBuilder resultBuilder = new StringBuilder();
 
-        return resultBuilder.append(formatFirstFourStrings(dividend, divider, calculationDTO)).append(formatLastStrings(dividend, calculationDTO)).toString();
+        return resultBuilder.append(formatFirstFourStrings(dividend, divider, calculationDTO))
+                            .append(formatLastStrings(dividend, calculationDTO)).toString();
     }
 
-    private StringBuilder formatFirstFourStrings(final int dividend, final int divider, final CalculationDTO calculationDTO) {
+    private StringBuilder formatFirstFourStrings(final int dividend, final int divider,
+                                                 final CalculationDTO calculationDTO) {
         final StringBuilder resultBuilder = new StringBuilder();
         final List<Integer> subtracts = calculationDTO.getSubtracts();
         final List<Integer> numbers = calculationDTO.getNumbers();
@@ -50,7 +52,8 @@ public class Formatter {
             resultBuilder.append(SPACE + numbers.get(0) + NEW_LINE);
         } else {
             int j = 0;
-            while (j < firstSubstractLength && String.valueOf(String.valueOf(dividend).charAt(j)).equals(String.valueOf(String.valueOf(subtracts.get(0)).charAt(j)))) {
+            while (j < firstSubstractLength && String.valueOf(String.valueOf(dividend).charAt(j))
+                            .equals(String.valueOf(String.valueOf(subtracts.get(0)).charAt(j)))) {
                 resultBuilder.append(SPACE);
                 j++;
             }

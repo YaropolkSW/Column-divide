@@ -36,7 +36,8 @@ public class ColumnDivideTest {
         final int dividend = 8;
         final int divider = 0;
         final String message = "Нельзя делить на ноль!";
-        Assertions.assertThrowsExactly(ArithmeticException.class, () -> columnDivide.divideByColumn(dividend, divider), message);
+        Assertions.assertThrowsExactly(ArithmeticException.class, () ->
+                columnDivide.divideByColumn(dividend, divider), message);
     }
 
     @Test
@@ -44,6 +45,7 @@ public class ColumnDivideTest {
         final int dividend = 8;
         final int divider = 16;
         final String message = "Делитель больше делимого!";
-        Assertions.assertThrows(ArithmeticException.class, () -> columnDivide.divideByColumn(dividend, divider), message);
+        Assertions.assertThrows(ArithmeticException.class, () ->
+                columnDivide.divideByColumn(dividend, divider), message);
     }
 }
